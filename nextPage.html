@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Make your Rockband</title>
+	<style>
+		body{margin: 2vw}
+		div{margin: 0; padding: 0}
+		@font-face {font-family: 'PPEditorialNew'; src:url('./fonts/PPEditorialNew-Regular.otf') format('woff');}
+		.col2{display: flex; margin: auto;}
+		#a,#b{margin: 0; padding-right: 1vw;
+			font-size: 8vw; font-family:'PPEditorialNew'; letter-spacing: -0.02em}
+
+		button{background-color: #E5E8E8 ; border: none;  color: black;  padding: 1vw 4vw 1.5vw 4vw;  text-align: center;
+			font-size: 4vw; font-family: "Bookman Old Style", Georgia, serif; font-weight: 400; }
+		button:hover{background-color: black; color: white;}
+		.bookman{text-align: center; padding: 1vw 1vw 1vw 1vw; background-color: black; color: white; font-size: 2vw; font-family: "Bookman Old Style", Georgia, serif; font-weight: 400; letter-spacing:-0.03em }
+		#dateprint{; margin-top: 10vw; }
+
+	</style>
+</head>
+<body>
+	<div class="bookman">Your Rockband name is ...</div>
+	<div class="col2">
+		<div id="a">
+			<div id="color">Orangered</div>
+			<button id="stop1">Stop</button>
+		</div>
+		<div id="b">
+			<div id="food"></div>
+		</div>
+	</div>
+
+	<div id="dateprint" class="bookman">0</div>
+
+
+
+	<script type="text/javascript">
+
+		var birthTimer = setInterval(makeDate,100);
+		function makeDate(){
+			var d = new Date();
+
+			var year = d.getFullYear();
+			var month = d.getMonth();
+			var date = d.getDate();
+			var hour = d.getHours();
+			var minute = d.getMinutes();
+			var second = d.getSeconds();
+
+			var output = "Rockband Birth:<br>" + date + "th " + monthTrans(month) + " " + year + ", " + hour + ":" + minute + ":" + second;
+			dateprint.innerHTML = output;
+		}
+
+		function monthTrans(num){
+			if(num == 1){num2 = "January"}
+			if(num == 2){num2 = "February"}
+			if(num == 3){num2 = "March"}
+			if(num == 4){num2 = "April"}
+			if(num == 5){num2 = "May"}
+			if(num == 6){num2 = "June"}
+			if(num == 7){num2 = "July"}
+			if(num == 8){num2 = "August"}
+			if(num == 9){num2 = "September"}
+			if(num == 10){num2 = "October"}
+			if(num == 11){num2 = "November"}
+			if(num == 12){num2 = "December"}
+			return num2
+		}
+
+
+		// function aTrans(num){
+		// 	if(num.length == 1){num2 = "0" + num}
+		// 	else if(num.length == 2){num2 = num}
+		// 	return num2
+		// }
+
+
+
+
+
+
+
+
+
+		var colorName = "Red,Orange,Yellow,Green,Blue,Purple,Pink,Brown,Gray,Black,White,Beige,Turquoise,Lavender,Magenta,Cyan,Teal,Indigo,Violet,Maroon,Olive,Gold,Silver,Bronze,Crimson,Aqua,Navy,Sapphire,Emerald,Ruby,Coral,Jade,Slate,Charcoal,Ivory,Fuchsia,Azure,Lilac,Mauve,Cerulean,Periwinkle,Mahogany,Khaki,Hazel,Rust,Ochre,Topaz,Amber,Pewter";
+
+		var colorArray = colorName.split(",");
+		var k = 0;
+		var colorTimer = setInterval(colorPrint,300);
+		function colorPrint(){
+			color.innerHTML = colorArray[k];
+			k++;
+			if(k == colorArray.length){
+				clearInterval(colorTimer);
+				k = 0;
+				setInterval(colorTimer);
+				stop1.onclick()
+			}
+		}
+
+		stop1.onclick = function(){
+			clearInterval(colorTimer);
+			foodStart()
+			const button1 = document.getElementById('stop1');
+  			button1.remove();
+		}
+
+
+
+
+		var foodName = "Spaghetti,Sushi,Burger,Pizza,Tacos,Lasagna,Burrito,Sashimi,Pad Thai,Enchiladas,Ramen,Pasta,Gyro,Pho,Samosa,Tandoori,Dim-Sum,Ceviche,Fajitas,Moussaka,Pierogi,Kebab,Cannoli,Goulash,Poutine,Croissant,Risotto,Quiche,Scone,Calzone,Chowder,Biryani,Pancakes,Crepes,Baklava,Jambalaya,Ratatouille,Tempura,Fried-Rice,Gazpacho,Sausage,Empanadas,Curry,Hummus,Falafel,Tamales,Gumbo,Peking-Duck,Crab-Rangoon,Clam Chowder,Baba-Ganoush,Beef-Wellington,Miso-Soup,Philly-Cheesesteak,Beignets,Eggplant-Parmesan"
+
+		function foodStart(){
+			var foodArray = foodName.split(",");
+			var f = 0;		
+			var foodTimer = setInterval(foodPrint,300);
+			function foodPrint(){
+				food.innerHTML = foodArray[f];
+				f++;
+				if(f == foodArray.length){
+					clearInterval(foodTimer);
+					f = 0;
+					setInterval(foodTimer);
+					stop2.onclick()
+					}
+				}
+
+			var stop2 = document.createElement("button");
+			stop2.innerHTML = "stop";
+			b.appendChild(stop2);
+			stop2.onclick = function(){
+				clearInterval(foodTimer);
+				clearInterval(birthTimer)
+  				stop2.remove();
+  				bookman.style.backgroundColor = "blue"
+			}
+		}	
+
+
+
+
+
+
+	</script>
+</body>
+</html>
